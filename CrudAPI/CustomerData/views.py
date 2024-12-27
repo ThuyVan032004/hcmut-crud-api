@@ -67,8 +67,9 @@ def addCustomer(request):
 def getAllCustomer(request):
     if request.method == 'GET':
         response = []
+        count = 0
         try:
-            business_entities = BusinessEntityAddress.objects.all()[:1000]
+            business_entities = BusinessEntityAddress.objects.all()[:5000]
             for business_entity in business_entities:
                 person = Person.objects.filter(BusinessEntityID=business_entity.BusinessEntityID.BusinessEntityID).first()
                 if not person:
@@ -79,10 +80,8 @@ def getAllCustomer(request):
                     continue
                 address_id = business_entity.AddressID.AddressID
                 address_type_id = business_entity.AddressTypeID.AddressTypeID
-                
                 address = Address.objects.get(AddressID=address_id)
                 address_type = AddressType.objects.get(AddressTypeID=address_type_id)
-
                 data = {
                     "BusinessEntityID": person.BusinessEntityID.BusinessEntityID,
                     "PersonType": person.PersonType,
@@ -98,8 +97,11 @@ def getAllCustomer(request):
                     "EmailAddress": email_address.EmailAddress,
                     "AddressType": address_type.Name,   
                 }
+                # print("Data:", data)
+                # count += 1
+                # print("Count:", count)
                 
-                response.append({ str(person.BusinessEntityID) : data })
+                response.append(data)
             
             return JsonResponse(response, safe=False)
         except Exception as e:
