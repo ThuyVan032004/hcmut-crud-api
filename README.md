@@ -29,8 +29,19 @@ pip install -r requirements.txt
 ```
 
 ## Usage
-Apply the following commands in your terminal
+Since the API use local storage, change the DATABASE variable in CrudAPI/settings.py file 
+```bash
+'default': {
+        'ENGINE': 'mssql',
+        'NAME': 'CompanyX',
+        'HOST': 'LAPTOP-DTATJQED\\SQLEXPRESS', # Change the host name to your local SQL Server host name
+        'OPTIONS': {
+            'trusted_connection': 'yes',
+        },
+    }
+```
 
+Apply the following commands in your terminal
 ```bash
 cd CrudAPI
 python manage.py runserver
