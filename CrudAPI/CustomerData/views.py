@@ -69,7 +69,7 @@ def getAllCustomer(request):
         response = []
         count = 0
         try:
-            business_entities = BusinessEntityAddress.objects.all()[:5000]
+            business_entities = BusinessEntityAddress.objects.all()[:500]
             for business_entity in business_entities:
                 person = Person.objects.filter(BusinessEntityID=business_entity.BusinessEntityID.BusinessEntityID).first()
                 if not person:
@@ -97,6 +97,7 @@ def getAllCustomer(request):
                     "EmailAddress": email_address.EmailAddress,
                     "AddressType": address_type.Name,   
                 }
+                
                 response.append(data)
             
             return JsonResponse(response, safe=False)
