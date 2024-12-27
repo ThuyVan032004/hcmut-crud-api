@@ -1,6 +1,5 @@
 from django.http import JsonResponse
 import json 
-from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from .Models import *
 
