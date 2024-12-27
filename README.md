@@ -22,6 +22,11 @@ or
 ```bash
 source ./env/Scripts/activate
 ```
+## Installation
+Install the neccessary packages 
+```bash
+pip install -r requirements.txt
+```
 
 ## Usage
 Apply the following commands in your terminal
