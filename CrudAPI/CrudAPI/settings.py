@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'ManagementData.apps.ManagementdataConfig',
+    'CustomerData.apps.CustomerdataConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,13 +75,24 @@ WSGI_APPLICATION = 'CrudAPI.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
+    # 'rds': {
+    #     'ENGINE': 'mssql',
+    #     'NAME': 'CompanyX',
+    #     'HOST': 'customer-db.c9ey4a6sin18.ap-southeast-1.rds.amazonaws.com',
+    #     'USER': 'admin',
+    #     'PORT': 1433,
+    #     'PASSWORD': 'admin123!!',
+    #     'OPTIONS': {
+    #         'driver': 'ODBC Driver 17 for SQL Server',
+    #     },
+    # },
+    
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'CompanyX_DW',
+        'NAME': 'CompanyX',
         'HOST': 'LAPTOP-DTATJQED\\SQLEXPRESS',
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'Trusted_Connection': True,
+            'trusted_connection': 'yes',
         },
     }
 }
@@ -127,3 +138,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
