@@ -97,10 +97,6 @@ def getAllCustomer(request):
                     "EmailAddress": email_address.EmailAddress,
                     "AddressType": address_type.Name,   
                 }
-                # print("Data:", data)
-                # count += 1
-                # print("Count:", count)
-                
                 response.append(data)
             
             return JsonResponse(response, safe=False)
@@ -119,10 +115,47 @@ def deleteCustomer(request, BusinessEntityID):
         except Exception as e:
             return JsonResponse({'message': str(e)}, status=500)
     else:
-        return JsonResponse({'message': 'Method not allowed'}, status=405)  # Return 405 for non-DELETE methods
+        return JsonResponse({'message': 'Method not allowed'}, status=405) 
         
-        
-
-        
-        
-        
+@csrf_exempt
+def updateCustomer(request, BusinessEntityID):
+    if request.method == 'PATCH':
+        try:
+            data = json.loads(request.body)
+            
+            person_person_data = {
+            "BusinessEntityID": BusinessEntityID,  
+            "PersonType": data.get('PersonType'),
+            "NameStyle": data.get('NameStyle'),
+            "FirstName": data.get('FirstName'),
+            "LastName": data.get('LastName'),
+            "EmailPromotion": data.get('EmailPromotion'),  
+            }
+            
+            updated_person = Person.objects.filter(BusinessEntityID=BusinessEntityID).update(**person_person_data)
+            
+            person_email_address_data = {
+                "BusinessEntityID": BusinessEntityID,  # Use the new business entity instance
+                "EmailAddress": data.get('EmailAddress'),
+            }
+            updated_email_address = EmailAddress.objects.filter(BusinessEntityID=BusinessEntityID).update(**person_email_address_data)
+            
+            state_province_name = data.get('StateProvinceName')
+            state_province_id = StateProvince.objects.filter(Name=state_province_name).first().StateProvinceID
+            
+            person_address_data = {
+                "AddressLine1": data.get('AddressLine1'),
+                "City": data.get('City'),
+                "StateProvinceID": state_province_id,
+                "PostalCode": data.get('PostalCode'),
+            }
+            
+            updated_address = Address.objects.filter(AddressID=BusinessEntityAddress.objects.filter(BusinessEntityID=BusinessEntityID).first().AddressID.AddressID).update(**person_address_data)
+            
+            return JsonResponse({'message': 'Successfully updated customer'}, status=200)
+        except Exception as e:
+            return JsonResponse({'message': str(e)}, status=500)
+            
+            
+            
+            
