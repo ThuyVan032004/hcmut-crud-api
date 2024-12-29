@@ -3,6 +3,7 @@
 ## Prerequisite
 - Download [Python](https://www.python.org/)
 - Download [pip](https://pip.pypa.io/en/stable/) 
+- Download [Database](https://drive.google.com/file/d/1soTihyI_bozGfv3N-p-WjdjZ568o8Ith/view?usp=drive_link)
 
 ## Python virtual environment
 You can use Python virtual environment using the following command
@@ -41,8 +42,20 @@ Since the API use local storage, change the DATABASE variable in CrudAPI/setting
     }
 ```
 
-Apply the following commands in your terminal
+Enter the following command
 ```bash
 cd CrudAPI
-python manage.py runserver
+```
+Then
+```bash
+py manage.py makemigrations CustomerData
+```
+If there is any new file created in the 'migrations' folder, delete them. Command
+```bash
+py manage.py migrate
+```
+
+Run server with the command
+```bash
+py manage.py runserver
 ```
