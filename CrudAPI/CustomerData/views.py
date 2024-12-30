@@ -67,7 +67,8 @@ def getAllCustomer(request):
         response = []
         count = 0
         try:
-            business_entities = BusinessEntityAddress.objects.all()[:500]
+            # Get last 500 business entities, ordered by ID in descending order
+            business_entities = BusinessEntityAddress.objects.all().order_by('-BusinessEntityID')[:500]
             for business_entity in business_entities:
                 person = Person.objects.filter(BusinessEntityID=business_entity.BusinessEntityID.BusinessEntityID).first()
                 if not person:
