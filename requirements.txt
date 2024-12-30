@@ -1,4 +1,4 @@
 django
 zope.interface
 mssql-django
-
+django-cors-headers
