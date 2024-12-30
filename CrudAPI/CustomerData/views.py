@@ -3,7 +3,6 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from .Models import *
 
-
 @csrf_exempt
 def addCustomer(request):
     if request.method == 'POST':
