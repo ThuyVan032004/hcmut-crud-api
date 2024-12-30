@@ -48,10 +48,7 @@ cd CrudAPI
 ```
 Then
 ```bash
-py manage.py makemigrations CustomerData
-```
-If there is any new file created in the 'migrations' folder, delete them. Command
-```bash
+py manage.py makemigrations 
 py manage.py migrate
 ```
 
